@@ -53,6 +53,39 @@ const requestListener = async (req, res) => {
         responseHelper.errorHandler(res, 400, 'data format is not correct');
       }
     });
+  } else if (req.url === '/posts' && req.method === 'DELETE') {
+    await Post.deleteMany({});
+    responseHelper.successHandler(res, 200, null, 'data delete');
+  } else if (req.url.startsWith('/posts/') && req.method === 'DELETE') {
+    const _id = req.url.split('/').pop();
+    await Post.findByIdAndDelete(_id);
+    responseHelper.successHandler(res, 200, null, 'data delete');
+  } else if (req.url.startsWith('/posts/') && req.method === 'PATCH') {
+    req.on('end', async function () {
+      try {
+        const postData = JSON.parse(body);
+        //name check
+        if (!postData.name) {
+          responseHelper.errorHandler(res, 400, 'name is required');
+        } else {
+          const _id = req.url.split('/').pop();
+          const post = await Post.findByIdAndUpdate(_id, postData);
+          responseHelper.successHandler(res, 201, post);
+        }
+      } catch (err) {
+        console.log(err, 'err');
+        responseHelper.errorHandler(res, 400, 'data format is not correct');
+      }
+    });
+  } else if (req.url.startsWith('/posts/') && req.method === 'GET') {
+    const _id = req.url.split('/').pop();
+    try {
+      const post = await Post.findById(_id);
+      console.log(post, 'post');
+      responseHelper.successHandler(res, 200, post);
+    } catch (err) {
+      responseHelper.errorHandler(res, 400, 'data is not exist');
+    }
   } else if (req.method === 'OPTIONS') {
     //OPTIONS
     res.writeHead(200, header);

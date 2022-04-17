@@ -1,11 +1,13 @@
 const header = require('../header');
 
 module.exports = {
-  successHandler(res, statusCode, data, message = null) {
+  successHandler(res, statusCode, data = null, message = null) {
     const response = {
       status: 'success',
-      data: data,
     };
+    if (data) {
+      response.data = data;
+    }
     if (message) {
       response.message = message;
     }
