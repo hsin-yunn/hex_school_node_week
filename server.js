@@ -69,7 +69,9 @@ const requestListener = async (req, res) => {
           responseHelper.errorHandler(res, 400, 'name is required');
         } else {
           const _id = req.url.split('/').pop();
-          const post = await Post.findByIdAndUpdate(_id, postData);
+          const post = await Post.findByIdAndUpdate(_id, postData, {
+            new: true,
+          });
           responseHelper.successHandler(res, 201, post);
         }
       } catch (err) {
