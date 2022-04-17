@@ -4,6 +4,7 @@ const Post = require('./models/post');
 const dotenv = require('dotenv');
 const header = require('./header');
 const responseHelper = require('./helpers/responseHelper');
+const dataHelper = require('./helpers/dataHelper');
 
 //env
 dotenv.config({ path: './config.env' });
@@ -19,7 +20,7 @@ mongoose
     console.log('資料庫連線成功');
   })
   .catch((error) => {
-    console.log(error);
+    console.log(error, '資料庫連線失敗');
   });
 
 //api
@@ -57,7 +58,7 @@ const requestListener = async (req, res) => {
     await Post.deleteMany({});
     responseHelper.successHandler(res, 200, null, 'data delete');
   } else if (req.url.startsWith('/posts/') && req.method === 'DELETE') {
-    const _id = req.url.split('/').pop();
+    const _id = dataHelper.findIdFromUrl(req.url);
     await Post.findByIdAndDelete(_id);
     responseHelper.successHandler(res, 200, null, 'data delete');
   } else if (req.url.startsWith('/posts/') && req.method === 'PATCH') {
@@ -68,22 +69,20 @@ const requestListener = async (req, res) => {
         if (!postData.name) {
           responseHelper.errorHandler(res, 400, 'name is required');
         } else {
-          const _id = req.url.split('/').pop();
+          const _id = dataHelper.findIdFromUrl(req.url);
           const post = await Post.findByIdAndUpdate(_id, postData, {
             new: true,
           });
           responseHelper.successHandler(res, 201, post);
         }
       } catch (err) {
-        console.log(err, 'err');
         responseHelper.errorHandler(res, 400, 'data format is not correct');
       }
     });
   } else if (req.url.startsWith('/posts/') && req.method === 'GET') {
-    const _id = req.url.split('/').pop();
+    const _id = dataHelper.findIdFromUrl(req.url);
     try {
       const post = await Post.findById(_id);
-      console.log(post, 'post');
       responseHelper.successHandler(res, 200, post);
     } catch (err) {
       responseHelper.errorHandler(res, 400, 'data is not exist');
@@ -93,14 +92,7 @@ const requestListener = async (req, res) => {
     res.writeHead(200, header);
     res.end();
   } else {
-    res.writeHead(404, header);
-    res.write(
-      JSON.stringify({
-        status: 'failed',
-        message: 'Page not found',
-      }),
-    );
-    res.end();
+    responseHelper.errorHandler(res, 404, 'page not found');
   }
 };
 
