@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "cafd1a72-9149-49f1-a115-15a54aacbfaa",
+		"name": "BLOG_HEROKU",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"今天午餐吃炸豬排2\"\n}"
+				},
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"chanage\"\n}"
+				},
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://young-woodland-30590.herokuapp.com/posts/:id",
+					"protocol": "https",
+					"host": [
+						"young-woodland-30590",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
