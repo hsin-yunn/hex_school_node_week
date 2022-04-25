@@ -66,7 +66,7 @@ router.delete('/:id', async function (req, res, next) {
     if (!data) {
       responseHelper.errorHandler(res, 400, 'data is not exist.');
     } else {
-      res.status(201).json({
+      res.status(200).json({
         status: 'success',
         message: 'data delete',
       });
