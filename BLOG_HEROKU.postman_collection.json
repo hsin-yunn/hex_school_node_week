@@ -32,7 +32,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"今天午餐吃炸豬排2\"\n}"
+					"raw": "{\n    \"name\":\"今天午餐吃炸豬排\",\n    \"content\":\"好好吃\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://young-woodland-30590.herokuapp.com/posts",
@@ -103,7 +108,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\":\"chanage\"\n}"
+					"raw": "{\n    \"name\": \"今天午餐喝珍奶\",\n    \"content\": \"好好喝\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://young-woodland-30590.herokuapp.com/posts/:id",
