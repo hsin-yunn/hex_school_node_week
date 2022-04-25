@@ -37,13 +37,15 @@ router.post('/', async function (req, res, next) {
 router.patch('/:id', async function (req, res, next) {
   try {
     const postData = req.body;
+    const _id = req.params.id;
     //name check
     if (!postData.name) {
       responseHelper.errorHandler(res, 400, 'name is required');
     } else if (!postData.content) {
       responseHelper.errorHandler(res, 400, 'name is required');
+    } else if (!_id) {
+      responseHelper.errorHandler(res, 400, 'data is not exist.');
     } else {
-      const _id = req.params.id;
       const post = await Post.findByIdAndUpdate(_id, postData, {
         new: true,
       });
@@ -83,6 +85,9 @@ router.delete('/', async function (req, res, next) {
 //show
 router.get('/:id', async function (req, res, next) {
   const _id = req.params.id;
+  if (!_id) {
+    responseHelper.errorHandler(res, 400, 'data is not exist.');
+  }
   const post = await Post.findById(_id);
   if (!post) {
     responseHelper.errorHandler(res, 400, 'data is not exist.');
